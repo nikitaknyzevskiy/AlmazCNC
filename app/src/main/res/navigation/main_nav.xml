@@ -16,4 +16,8 @@
         android:id="@+id/motionFragment"
         android:name="com.rokobit.almaz.screen.MotionFragment"
         android:label="MotionFragment" />
+    <fragment
+        android:id="@+id/positionFragment"
+        android:name="com.rokobit.almaz.screen.PositionFragment"
+        android:label="PositionFragment" />
 </navigation>
