@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/motion_plus_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+X"
+        app:layout_constraintBottom_toTopOf="@+id/motion_minus_y"
+        app:layout_constraintStart_toEndOf="@+id/motion_plus_y"
+        app:layout_constraintTop_toBottomOf="@+id/motion_plus_y" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/motion_minus_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-X"
+        app:layout_constraintBottom_toTopOf="@+id/motion_minus_y"
+        app:layout_constraintEnd_toStartOf="@+id/motion_plus_y"
+        app:layout_constraintTop_toBottomOf="@+id/motion_plus_y" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/motion_minus_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:rotation="90"
+        android:text="-Y"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/motion_plus_y" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/motion_plus_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="148dp"
+        android:rotation="90"
+        android:text="+Y"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/motion_load_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Load status"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/motion_tvrun_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="TvRun = "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:ems="10"
+        android:hint="Delay 10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/motion_minus_y" />
+
+    <Button
+        android:id="@+id/motion_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/motion_minus_y" />
+</androidx.constraintlayout.widget.ConstraintLayout>

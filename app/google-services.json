@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "221734752411",
+    "firebase_url": "https://almaz-7839b.firebaseio.com",
+    "project_id": "almaz-7839b",
+    "storage_bucket": "almaz-7839b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221734752411:android:3f6d7ef857243895cb763e",
+        "android_client_info": {
+          "package_name": "com.rokobit.almaz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221734752411-3rqjoq5trgvlhakf8gf66bdv11rl5jon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTt1mRdCwrkz6RHZipBRgGPlRPShb3MjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "221734752411-3rqjoq5trgvlhakf8gf66bdv11rl5jon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
