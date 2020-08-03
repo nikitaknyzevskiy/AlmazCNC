@@ -1,27 +1,24 @@
 package com.rokobit.almaz.screen
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.*
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rokobit.almaz.R
 import com.rokobit.almaz.body.CommandBody
 import kotlinx.android.synthetic.main.fragment_motion.*
-import java.lang.Exception
+import kotlin.math.min
 
-enum class MotionType {
-    PLUS_Y,
-    PLUS_X,
-    MINUS_Y,
-    MINUS_X
-}
-
-class MotionFragment : Fragment() {
+class MotionFragment : Fragment(), Gamepad.OnButtonTouchListener {
 
     private val mViewModel: MotionViewModel by lazy {
         ViewModelProviders.of(this)
@@ -60,21 +57,8 @@ class MotionFragment : Fragment() {
             return@setOnTouchListener true
         }*/
 
-        motion_plus_y.setOnClickListener {
-            sendCommand("move_y_forward")
-        }
+        gamepad.setOnButtonTouchListener(this)
 
-        motion_plus_x.setOnClickListener {
-            sendCommand("move_x_forward")
-        }
-
-        motion_minus_y.setOnClickListener {
-            sendCommand("move_y_back")
-        }
-
-        motion_minus_x.setOnClickListener {
-            sendCommand("move_x_back")
-        }
 
         motion_stop.setOnClickListener {
             sendCommand("move_stop")
@@ -85,17 +69,20 @@ class MotionFragment : Fragment() {
         }
 
         mViewModel.motorStatus.observe(this.viewLifecycleOwner, Observer {
-            motion_tvrun_txt.text = "TvRun = " + if (it == 0) "Free" else if (it > 0) "Busy" else "Error"
+            motion_tvrun_txt.text =
+                "TvRun = " + if (it == 0) "Free" else if (it > 0) "Busy" else "Error"
         })
     }
 
-    private fun getDelay() : Long {
+    private fun getDelay(): Long {
         return editTextNumber.text.toString().toLong()
     }
 
     private fun sendCommand(type: MotionType, event: MotionEvent) {
 
-        mViewModel.timeOutRest = try {getDelay()} catch (e: Exception) {
+        mViewModel.timeOutRest = try {
+            getDelay()
+        } catch (e: Exception) {
             10L
         }
 
@@ -118,6 +105,19 @@ class MotionFragment : Fragment() {
 
     private fun sendCommand(action: String) {
         mViewModel.sendCommand(CommandBody(action))
+    }
+
+
+    override fun onActionDown(motionType: MotionType) {
+        when (motionType) {
+            MotionType.PLUS_Y -> sendCommand("move_y_forward")
+            MotionType.PLUS_X -> sendCommand("move_x_forward")
+            MotionType.MINUS_Y -> sendCommand("move_y_back")
+            MotionType.MINUS_X -> sendCommand("move_x_back")
+        }
+    }
+
+    override fun onActionUp(motionType: MotionType) {
     }
 
 }

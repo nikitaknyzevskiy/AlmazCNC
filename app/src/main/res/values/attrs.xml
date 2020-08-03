@@ -6,4 +6,16 @@
         <attr name="icon" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="Gamepad">
+        <attr name="color" format="color" />
+        <attr name="gradientColor" format="color"/>
+        <attr name="borderColor" format="color" />
+        <attr name="arrowColor" format="color" />
+        <attr name="borderStrokeWidth" format="integer" />
+        <attr name="buttonWidth" format="integer"/>
+        <attr name="arrowSize" format="integer"/>
+        <attr name="arrowStrokeWidth" format="integer"/>
+        <attr name="roundness" format="integer"/>
+    </declare-styleable>
+
 </resources>

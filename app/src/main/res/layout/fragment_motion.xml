@@ -6,45 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/motion_plus_x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+X"
-        app:layout_constraintBottom_toTopOf="@+id/motion_minus_y"
-        app:layout_constraintStart_toEndOf="@+id/motion_plus_y"
-        app:layout_constraintTop_toBottomOf="@+id/motion_plus_y" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/motion_minus_x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-X"
-        app:layout_constraintBottom_toTopOf="@+id/motion_minus_y"
-        app:layout_constraintEnd_toStartOf="@+id/motion_plus_y"
-        app:layout_constraintTop_toBottomOf="@+id/motion_plus_y" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/motion_minus_y"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:rotation="90"
-        android:text="-Y"
+    <com.rokobit.almaz.screen.Gamepad
+        android:id="@+id/gamepad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="90dp"
+        app:buttonWidth="25"
+        app:roundness="25"
+        app:color="@color/colorPrimary"
+        app:arrowStrokeWidth="5"
+        app:borderStrokeWidth="3"
+        app:arrowSize="5"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/motion_plus_y" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/motion_plus_y"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:rotation="90"
-        android:text="+Y"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/motion_stop" />
 
     <Button
         android:id="@+id/motion_load_status"
@@ -77,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/motion_minus_y" />
+        app:layout_constraintTop_toBottomOf="@+id/gamepad" />
 
     <Button
         android:id="@+id/motion_stop"
@@ -88,5 +65,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/motion_minus_y" />
+        app:layout_constraintTop_toBottomOf="@+id/gamepad" />
 </androidx.constraintlayout.widget.ConstraintLayout>
