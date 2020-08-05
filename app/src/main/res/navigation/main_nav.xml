@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_menuFragment_to_fragmentOpenFile"
             app:destination="@id/fragmentOpenFile" />
+        <action
+            android:id="@+id/action_menuFragment_to_printFragment"
+            app:destination="@id/printFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionFragment"
@@ -27,4 +30,8 @@
         android:id="@+id/fragmentOpenFile"
         android:name="com.rokobit.almaz.screen.open_file.FragmentOpenFile"
         android:label="FragmentOpenFile" />
+    <fragment
+        android:id="@+id/printFragment"
+        android:name="com.rokobit.almaz.screen.PrintFragment"
+        android:label="PrintFragment" />
 </navigation>

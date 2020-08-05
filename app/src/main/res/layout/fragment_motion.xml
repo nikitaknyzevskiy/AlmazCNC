@@ -11,17 +11,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="90dp"
-        app:buttonWidth="25"
-        app:roundness="25"
-        app:color="@color/colorPrimary"
+        app:arrowSize="5"
         app:arrowStrokeWidth="5"
         app:borderStrokeWidth="3"
-        app:arrowSize="5"
+        app:buttonWidth="25"
+        app:color="@color/colorPrimary"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/motion_stop" />
+        app:roundness="25" />
 
     <Button
         android:id="@+id/motion_load_status"
@@ -56,14 +55,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gamepad" />
 
-    <Button
-        android:id="@+id/motion_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Stop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gamepad" />
 </androidx.constraintlayout.widget.ConstraintLayout>

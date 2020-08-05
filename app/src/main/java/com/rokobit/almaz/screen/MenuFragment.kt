@@ -22,13 +22,15 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        menu_print.isEnabled = false
+        menu_print.isEnabled = true
 
         menu_scan.isEnabled = false
 
         menu_settings.isEnabled = false
 
         menu_active.isEnabled = false
+
+        menu_open_psd_to_layouts.isEnabled = false
 
         menu_motion.setOnClickListener {
             findNavController().navigate(
@@ -38,6 +40,10 @@ class MenuFragment : Fragment() {
 
         menu_open_psd_to_layouts.setOnClickListener {
             findNavController().navigate(R.id.action_menuFragment_to_fragmentOpenFile)
+        }
+
+        menu_print.setOnClickListener {
+            findNavController().navigate(R.id.action_menuFragment_to_printFragment)
         }
 
     }

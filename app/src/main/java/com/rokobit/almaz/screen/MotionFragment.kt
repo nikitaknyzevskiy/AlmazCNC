@@ -59,11 +59,6 @@ class MotionFragment : Fragment(), Gamepad.OnButtonTouchListener {
 
         gamepad.setOnButtonTouchListener(this)
 
-
-        motion_stop.setOnClickListener {
-            sendCommand("move_stop")
-        }
-
         motion_load_status.setOnClickListener {
             mViewModel.loadMotorStatus()
         }
@@ -78,35 +73,9 @@ class MotionFragment : Fragment(), Gamepad.OnButtonTouchListener {
         return editTextNumber.text.toString().toLong()
     }
 
-    private fun sendCommand(type: MotionType, event: MotionEvent) {
-
-        mViewModel.timeOutRest = try {
-            getDelay()
-        } catch (e: Exception) {
-            10L
-        }
-
-        val command = if (event.action == MotionEvent.ACTION_DOWN)
-            CommandBody(
-                when (type) {
-                    MotionType.PLUS_Y -> "move_y_forward"
-                    MotionType.PLUS_X -> "move_x_forward"
-                    MotionType.MINUS_Y -> "move_y_back"
-                    MotionType.MINUS_X -> "move_x_back"
-                }
-            )
-        else if (event.action == MotionEvent.ACTION_UP)
-            CommandBody("move_stop")
-        else
-            return
-
-        mViewModel.sendCommand(command)
-    }
-
     private fun sendCommand(action: String) {
         mViewModel.sendCommand(CommandBody(action))
     }
-
 
     override fun onActionDown(motionType: MotionType) {
         when (motionType) {
@@ -118,6 +87,7 @@ class MotionFragment : Fragment(), Gamepad.OnButtonTouchListener {
     }
 
     override fun onActionUp(motionType: MotionType) {
+        sendCommand("move_stop")
     }
 
 }
