@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/item_save_file_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/color_white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_print_preview_container"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toTopOf="@id/gradient_view"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_resize_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/item_save_file_color_background_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="TODO"
+                android:background="@color/transparent" />
+
+            <ImageView
+                android:id="@+id/item_save_file_transparency_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/background_tiled_bitmap"
+                android:contentDescription="TODO"/>
+
+            <ImageView
+                android:id="@+id/item_save_file_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:elevation="1dp" />
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_resize_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/item_save_file_image_progress_bar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_print_preview_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_print_preview_container"
+        app:layout_constraintStart_toStartOf="@+id/item_print_preview_container"
+        app:layout_constraintTop_toTopOf="@+id/item_print_preview_container" />
+
+    <CheckBox
+        android:id="@+id/item_save_file_check_box_is_file_checked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:buttonTint="@color/c62a79a"
+        android:fontFamily="@font/roboto_reg"
+        android:textSize="8sp"
+        android:textAllCaps="true"
+        android:text="не зберігати"
+        android:textColor="@color/c62a79a"
+        app:layout_constraintStart_toStartOf="@+id/fragment_resize_guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_save_file_edit_text_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="6dp"
+        android:focusable="false"
+        android:fontFamily="@font/roboto_reg"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="Untitled-1-2_Layer_123456789012345678901234567890"
+        android:textColor="@color/c383B50"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/fragment_resize_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/item_save_file_check_box_is_file_checked"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/gradient_view"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/background_item_print_preview_layout_separation_view_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,9 +5,17 @@
     <string name="scan">Scan</string>
     <string name="settings">Settings</string>
     <string name="active">Active</string>
-
+    <!--Fragment position-->
     <string name="workpiece_size">Workpiece size</string>
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="point_location">Point location</string>
+    <!--Fragment open file-->
+    <string name="fragment_open_file_title">Open file</string>
+    <string name="error_message_an_attempt_to_copy_the_file_itself">An attempt to copy the file itself</string>
+    <string name="error_message_source_file_not_found">Source file not found</string>
+    <string name="error_message_destination_file_not_found">Destination file not found</string>
+    <string name="file_copy_success_message">Copied successfully</string>
+    <string name="not_copied_message">Not copied</string>
+    <string name="error_message_copying_interrupted">The process of copying the file was interrupted</string>
 </resources>
