@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white">
+
+    <ImageView
+        android:id="@+id/iv_arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="2dp"
+        android:padding="19dp"
+        android:src="@drawable/ic_arrow_back_fragment_open_file"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/back" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_reg"
+        android:letterSpacing="0.01"
+        android:maxLines="1"
+        android:text="@string/open_file"
+        android:textColor="#4F4F4F"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_arrow_back" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_previously_opened"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:background="@color/color_white"
+        tools:listitem="@layout/item_open_image"
+        tools:itemCount="5"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_new_image"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:letterSpacing="0.03"
+            android:textStyle="bold"
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:drawableEnd="@drawable/ic_item_open_file_arrow_right"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/open_file"
+            android:background="@drawable/selector_button_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_previously_opened" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,10 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 class ImageEntity(
+    var path: String = "",
+    var size: Long = 0L
+) {
     @PrimaryKey(autoGenerate = true)
-    var imageId: Long = 0L,
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    var image: ByteArray = byteArrayOf(),
-    var size: Long = 0L,
-    var date: String = ""
-)
+    var imageId: Long = 0L
+}

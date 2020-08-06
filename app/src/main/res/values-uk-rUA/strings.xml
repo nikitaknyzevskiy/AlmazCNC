@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Almaz CNC</string>
-    <string name="fragment_open_file_title">Відкрити файл</string>
-    <string name="error_message_an_attempt_to_copy_the_file_itself">Спроба скопіювати файл сам в себе</string>
-    <string name="error_message_source_file_not_found">вхідний файл не знайдено</string>
-    <string name="error_message_destination_file_not_found">вихідний файл не знайдено</string>
-    <string name="file_copy_success_message">скопійовано успішно</string>
-    <string name="not_copied_message">Не скопійовано</string>
-    <string name="error_message_copying_interrupted">Копіювання перевано</string>
+    <!--Fragment open file-->
+    <string name="back">Назад</string>
+    <string name="open_file">Відкрити файл</string>
 </resources>

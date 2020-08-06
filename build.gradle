@@ -37,6 +37,8 @@ buildscript {
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.0'
 
         classpath 'com.google.firebase:firebase-appdistribution-gradle:2.0.0'
+
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 

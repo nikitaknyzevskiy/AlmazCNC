@@ -37,7 +37,7 @@ class MenuFragment : Fragment() {
         }
 
         menu_open_psd_to_layouts.setOnClickListener {
-            findNavController().navigate(R.id.action_menuFragment_to_fragmentOpenFile)
+            findNavController().navigate(R.id.action_menuFragment_to_openFileFragment)
         }
 
     }

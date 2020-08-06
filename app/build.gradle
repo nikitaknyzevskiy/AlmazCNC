@@ -10,6 +10,8 @@ apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'com.google.firebase.crashlytics'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 kapt {
     generateStubs = true
 }
@@ -39,6 +41,11 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 dependencies {
