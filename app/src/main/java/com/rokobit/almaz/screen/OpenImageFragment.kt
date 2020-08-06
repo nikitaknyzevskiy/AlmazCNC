@@ -73,11 +73,10 @@ class OpenImageFragment : Fragment() {
     }
 
     private fun openGallery() {
-        val i = Intent(
-            Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        )
-        startActivityForResult(i, GALLERY_REQUEST)
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+        intent.type = "image/*"
+        startActivityForResult(intent, GALLERY_REQUEST)
     }
 
     private fun onImageSelected(data: Intent?) {
