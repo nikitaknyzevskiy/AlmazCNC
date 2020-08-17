@@ -67,6 +67,7 @@ class MotionFragment : Fragment(), Gamepad.OnButtonTouchListener {
             motion_tvrun_txt.text =
                 "TvRun = " + if (it == 0) "Free" else if (it > 0) "Busy" else "Error"
         })
+
     }
 
     private fun getDelay(): Long {

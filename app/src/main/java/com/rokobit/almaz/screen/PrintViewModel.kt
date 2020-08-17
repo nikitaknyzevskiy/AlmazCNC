@@ -22,7 +22,12 @@ class PrintViewModel : AlmazViewModel() {
             try {
                 fileRepository.uploadImage(file)
                 data.postValue(true)
-            } catch (e: Exception) {
+            }
+            catch (e: com.google.gson.stream.MalformedJsonException) {
+                Log.e("Nik", "upload image error", e)
+                data.postValue(true)
+            }
+            catch (e: Exception) {
                 Log.e("Nik", "upload image error", e)
                 data.postValue(false)
             }
@@ -31,20 +36,28 @@ class PrintViewModel : AlmazViewModel() {
         return data
     }
 
-    fun startPrint() {
-        sendCommand(CommandBody("start"))
+    fun startPrint() = GlobalScope.launch(Dispatchers.IO) {
+        commandResponse.hardSendCommand(
+            CommandBody("start")
+        )
     }
 
-    fun pausePrint() {
-        sendCommand(CommandBody("pause"))
+    fun pausePrint()  = GlobalScope.launch(Dispatchers.IO) {
+        commandResponse.hardSendCommand(
+            CommandBody("pause")
+        )
     }
 
-    fun continuePrint() {
-        sendCommand(CommandBody("continue"))
+    fun continuePrint()= GlobalScope.launch(Dispatchers.IO) {
+        commandResponse.hardSendCommand(
+            CommandBody("continue")
+        )
     }
 
-    fun stopPrint() {
-        sendCommand(CommandBody("stop"))
+    fun stopPrint() = GlobalScope.launch(Dispatchers.IO) {
+        commandResponse.hardSendCommand(
+            CommandBody("stop")
+        )
     }
 
 }

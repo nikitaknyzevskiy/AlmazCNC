@@ -66,22 +66,24 @@ class PrintFragment : Fragment() {
             print_cancel_btn.isEnabled = false
         }
 
+        print_print_btn.setOnClickListener {
+            print_pause_btn.isEnabled = true
+            print_cancel_btn.isEnabled = true
+            mViewModel.startPrint()
+        }
+
     }
 
     private val uploadImageObs = Observer<Boolean> {
         progressBar.visibility = View.INVISIBLE
-        print_start_btn.isEnabled = !it
         print_pause_btn.isEnabled = it
         print_cancel_btn.isEnabled = it
-
-
-        mViewModel.startPrint()
     }
 
     private fun loadExampleImage() {
         print_start_btn.isEnabled = false
 
-        val openRawResource = resources.openRawResource(R.raw.example_print)
+        val openRawResource = resources.openRawResource(R.raw.glaz)
 
         copyStreamToFile(openRawResource, file)
 
