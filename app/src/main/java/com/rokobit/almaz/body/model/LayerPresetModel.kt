@@ -7,8 +7,11 @@ data class LayerPresetModel(
     @SerializedName("Brightness")
     val brightness: Long = 0L,
     @SerializedName("White")
-    val white: Long = 0L,
+    val white: Long = 255L,
+    @SerializedName("Black")
+    val black: Long = 0L,
     val clearence: Long = 255,
+    val speed: Long = 5,
     val startupPrintPosition_X: Long = 0L,
     val startupPrintPosition_Y: Long = 0L,
     val layerPosition_X: Long = 0L,

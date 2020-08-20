@@ -1,11 +1,13 @@
 package com.rokobit.almaz.rest.repository
 
+import com.rokobit.almaz.body.model.LayerPresetModel
 import com.rokobit.almaz.rest.FileRequest
 import com.rokobit.almaz.unit.AppRest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.lang.Exception
 import java.util.*
 
 object FileRepository {
@@ -24,6 +26,15 @@ object FileRepository {
         headerData["file_name"] = file.name
 
         fileRest.uploadFile(headerData.toMap(), body)
+    }
+
+    suspend fun uploadLayers(layers: List<LayerPresetModel>) {
+        if (layers.isEmpty()) {
+            throw Exception("layers is empty")
+        }
+        val headerData: MutableMap<String, String> = HashMap()
+        headerData["layerPresetName"] = "Layer1Preset"
+        fileRest.sendLayers(headerData, layers.toTypedArray())
     }
 
 }

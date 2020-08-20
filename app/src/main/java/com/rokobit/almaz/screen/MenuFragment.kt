@@ -43,7 +43,7 @@ class MenuFragment : Fragment() {
         }
 
         menu_print.setOnClickListener {
-            findNavController().navigate(R.id.action_menuFragment_to_printFragment)
+            findNavController().navigate(R.id.action_menuFragment_to_imageSetupFragment)
         }
 
     }

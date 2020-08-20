@@ -15,33 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:indeterminate="true"
-        android:progressTint="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/print_imageview" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/print_start_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/upload"
-        app:layout_constraintBottom_toTopOf="@+id/print_print_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/print_print_btn"
         android:layout_width="0dp"
@@ -49,6 +22,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:enabled="false"
         android:text="@string/print"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,9 +35,9 @@
         android:layout_marginStart="16dp"
         android:enabled="false"
         android:text="@string/pause"
-        app:layout_constraintBottom_toTopOf="@+id/print_start_btn"
+        app:layout_constraintBottom_toTopOf="@+id/print_print_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/print_imageview" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/print_cancel_btn"
@@ -72,8 +46,8 @@
         android:layout_marginEnd="16dp"
         android:enabled="false"
         android:text="@android:string/cancel"
-        app:layout_constraintBottom_toTopOf="@+id/print_start_btn"
+        app:layout_constraintBottom_toTopOf="@+id/print_print_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/print_imageview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

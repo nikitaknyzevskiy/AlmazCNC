@@ -22,4 +22,6 @@
     <string name="pause">Pause</string>
     <string name="continu">continue</string>
     <string name="upload">Upload</string>
+    <string name="change_image">Select image</string>
+    <string name="next">Next</string>
 </resources>

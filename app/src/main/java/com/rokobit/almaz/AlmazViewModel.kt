@@ -3,10 +3,15 @@ package com.rokobit.almaz
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.rokobit.almaz.AlmazData.needMotorStatus
 import com.rokobit.almaz.body.CommandBody
 import com.rokobit.almaz.rest.repository.CommandRepository
 import com.rokobit.almaz.rest.repository.StatusResponse
 import kotlinx.coroutines.*
+
+object AlmazData {
+    var needMotorStatus = false
+}
 
 abstract class AlmazViewModel : ViewModel() {
 
@@ -14,7 +19,7 @@ abstract class AlmazViewModel : ViewModel() {
 
     private val statusResponse = StatusResponse
 
-    private val commandResponse = CommandRepository
+    val commandResponse = CommandRepository
 
     open val drawError = CoroutineExceptionHandler { _, error ->
         Log.e("Nik", "error", error)
@@ -22,7 +27,7 @@ abstract class AlmazViewModel : ViewModel() {
 
     private val commandList = arrayListOf<CommandBody>()
 
-    var timeOutRest = 10L
+    var timeOutRest = 0L
 
     fun sendCommand(commandBody: CommandBody) {
 
@@ -32,18 +37,14 @@ abstract class AlmazViewModel : ViewModel() {
             return
 
         GlobalScope.launch(Dispatchers.IO + drawError) {
-
             while (commandList.isNotEmpty()) {
                 val command = commandList[0]
 
-                if (command.action != "move_stop") {
+                if (needMotorStatus) {
                     while (getTvRun() > 0) {
                         motorStatus.postValue(1)
-                        delay(timeOutRest)
+                        delay(10L)
                     }
-                }
-                else {
-                    delay(timeOutRest)
                 }
 
                 motorStatus.postValue(0)
@@ -52,16 +53,16 @@ abstract class AlmazViewModel : ViewModel() {
                     command
                 )
 
-
                 commandList.removeAt(0)
 
+                needMotorStatus = false
+
+                if (command.action == "move_stop" || command.action == "stop" /*|| command.action == "pause"*/) {
+                    needMotorStatus = true
+                }
             }
 
         }
-
-        /*launch(Dispatchers.IO) {
-            commandResponse.hardSendCommand(commandBody)
-        }*/
 
     }
 
