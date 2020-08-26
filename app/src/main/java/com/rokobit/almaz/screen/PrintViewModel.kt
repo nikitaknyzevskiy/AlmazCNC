@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.rokobit.almaz.AlmazViewModel
@@ -13,8 +12,8 @@ import com.rokobit.almaz.body.model.LayerPresetModel
 import com.rokobit.almaz.rest.repository.FileRepository
 import com.rokobit.almaz.unit.BitmapUtils
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import psd.model.Psd
+import psd.parser.PsdFileParser
 import java.io.File
 
 class PrintViewModel : AlmazViewModel() {
@@ -46,8 +45,8 @@ class PrintViewModel : AlmazViewModel() {
         val layer = LayerPresetModel(
             pictureDensity = pixel.toLong(),
             speed = speed.toLong(),
-            black = black.toLong() * (10 /  255),
-            white = white.toLong() * (10 /  255),
+            black = black.toLong() * (10 / 255),
+            white = white.toLong() * (10 / 255),
             layerFile = outputFile.name,
             projectName = "Layer1Preset"
         )
@@ -67,6 +66,19 @@ class PrintViewModel : AlmazViewModel() {
         val value = layerLiveData.value
         value?.put(index, layer)
         layerLiveData.postValue(value)
+
+        emit(true)
+    }
+
+    fun decodePsdToLayers(context: Context, file: File) = liveData(Dispatchers.IO) {
+        val parser = PsdFileParser()
+        parser.parse(file.inputStream())
+
+        val psd = Psd(file)
+
+        for (i in 0..psd.layersCount) {
+            addLayer(context, layerLiveData.value?.size ?: 0, psd.getLayer(i).image, 20, 1, 0, 0)
+        }
 
         emit(true)
     }

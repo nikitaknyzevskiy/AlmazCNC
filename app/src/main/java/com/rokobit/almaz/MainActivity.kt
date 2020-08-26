@@ -2,6 +2,7 @@ package com.rokobit.almaz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import moe.xing.baseutils.Init
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,5 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         title = "Almaz version " + BuildConfig.VERSION_CODE
 
+
+        Init.getInstance(application, true, BuildConfig.VERSION_NAME, "Almaz")
     }
 }

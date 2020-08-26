@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rokobit.almaz.R
 import kotlinx.android.synthetic.main.fragment_layers_list.*
+import moe.xing.rxfilepicker.RxGetFile
 
 class LayersListFragment : Fragment() {
 
@@ -59,6 +60,19 @@ class LayersListFragment : Fragment() {
             mViewModel.uploadLayers().observe(this.viewLifecycleOwner, Observer {
                 findNavController().navigate(R.id.action_layersListFragment_to_printFragment)
             })
+        }
+
+        layerslist_add_psd_btn.setOnClickListener {
+            RxGetFile.newBuilder().isSingle(true).build()
+                .subscribe {file ->
+                    if (!file.name.contains(".psd"))
+                        return@subscribe
+
+                    it.visibility = View.INVISIBLE
+                    layerslist_psd_progressBar.visibility = View.VISIBLE
+
+                    mViewModel.decodePsdToLayers(requireContext(), file)
+                }
         }
     }
 

@@ -99,4 +99,6 @@ dependencies {
     //Media
     implementation 'com.github.yalantis:ucrop:2.2.5-native'
 
+    implementation 'com.github.Qixingchen:rx-android-file-picker:V1.1.0'
+
 }
