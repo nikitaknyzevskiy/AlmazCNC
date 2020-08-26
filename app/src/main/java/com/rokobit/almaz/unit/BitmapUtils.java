@@ -1,7 +1,10 @@
 package com.rokobit.almaz.unit;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.util.Log;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,28 +16,40 @@ public class BitmapUtils {
     private static final int BMP_WIDTH_OF_TIMES = 4;
     private static final int BYTE_PER_PIXEL = 3;
 
-    public static boolean save(Bitmap bitmap, File file) throws IOException {
-
-        if (bitmap == null){
+    /**
+     * Android Bitmap Object to Window's v3 24bit Bmp Format File
+     * @param orgBitmap
+     * @param filePath
+     * @return file saved result
+     */
+    public static boolean save(Bitmap orgBitmap, File filePath) throws IOException {
+        long start = System.currentTimeMillis();
+        if(orgBitmap == null){
             return false;
         }
 
+        if(filePath == null){
+            return false;
+        }
+
+        boolean isSaveSuccess = true;
+
         //image size
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
+        int width = orgBitmap.getWidth();
+        int height = orgBitmap.getHeight();
 
         //image dummy data size
         //reason : the amount of bytes per image row must be a multiple of 4 (requirements of bmp format)
         byte[] dummyBytesPerRow = null;
         boolean hasDummy = false;
         int rowWidthInBytes = BYTE_PER_PIXEL * width; //source image width * number of bytes to encode one pixel.
-        if(rowWidthInBytes % BMP_WIDTH_OF_TIMES > 0){
+        if(rowWidthInBytes%BMP_WIDTH_OF_TIMES>0){
             hasDummy=true;
             //the number of dummy bytes we need to add on each row
             dummyBytesPerRow = new byte[(BMP_WIDTH_OF_TIMES-(rowWidthInBytes%BMP_WIDTH_OF_TIMES))];
             //just fill an array with the dummy bytes we need to append at the end of each row
             for(int i = 0; i < dummyBytesPerRow.length; i++){
-                dummyBytesPerRow[i] = (byte)0x00;
+                dummyBytesPerRow[i] = (byte)0xFF;
             }
         }
 
@@ -50,7 +65,7 @@ public class BitmapUtils {
         int fileSize = imageSize + imageDataOffset;
 
         //Android Bitmap Image Data
-        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        orgBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
 
         //ByteArrayOutputStream baos = new ByteArrayOutputStream(fileSize);
         ByteBuffer buffer = ByteBuffer.allocate(fileSize);
@@ -114,9 +129,6 @@ public class BitmapUtils {
         int endPosition = row * col;
         while( row > 0 ){
             for(int i = startPosition; i < endPosition; i++ ){
-//                if (Color.alpha(pixels[i]) < 127){
-//                    pixels[i] = Color.BLACK;
-//                }
                 buffer.put((byte)(pixels[i] & 0x000000FF));
                 buffer.put((byte)((pixels[i] & 0x0000FF00) >> 8));
                 buffer.put((byte)((pixels[i] & 0x00FF0000) >> 16));
@@ -129,58 +141,20 @@ public class BitmapUtils {
             startPosition = startPosition - col;
         }
 
-        if (file.exists()) {
-            return saveToDisk(file, buffer);
-        } else {
-            return file.createNewFile() && saveToDisk(file, buffer);
-        }
+        FileOutputStream fos = new FileOutputStream(filePath);
+        fos.write(buffer.array());
+        fos.close();
+        Log.v("AndroidBmpUtil" ,System.currentTimeMillis()-start+" ms");
+
+        return isSaveSuccess;
     }
 
-    public static float calculateFinalFileSizeMB(Bitmap bitmap){
-        if (bitmap == null){
-            return 0f;
-        }
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        byte[] dummyBytesPerRow = null;
-        boolean hasDummy = false;
-        int rowWidthInBytes = BYTE_PER_PIXEL * width;
-        if(rowWidthInBytes % BMP_WIDTH_OF_TIMES > 0){
-            hasDummy = true;
-            dummyBytesPerRow = new byte[(BMP_WIDTH_OF_TIMES-(rowWidthInBytes%BMP_WIDTH_OF_TIMES))];
-            for(int i = 0; i < dummyBytesPerRow.length; i++){
-                dummyBytesPerRow[i] = (byte)0x00;
-            }
-        }
-        int imageSize = (rowWidthInBytes+(hasDummy ? dummyBytesPerRow.length : 0)) * height;
-        int imageDataOffset = 0x36;
-        int fileSize = imageSize + imageDataOffset;
-        return fileSize / 1024f / 1024f;
-    }
-
-    private static boolean saveToDisk(File file, ByteBuffer buffer){
-        FileOutputStream fos = null;
-        boolean result = false;
-        try {
-            fos = new FileOutputStream(file);
-            result = true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            result = false;
-        }
-        try {
-            if (fos != null) {
-                fos.write(buffer.array());
-                fos.close();
-                result = true;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            result = false;
-        }
-        return result;
-    }
-
+    /**
+     * Write integer to little-endian
+     * @param value
+     * @return
+     * @throws IOException
+     */
     private static byte[] writeInt(int value) throws IOException {
         byte[] b = new byte[4];
 
@@ -192,6 +166,12 @@ public class BitmapUtils {
         return b;
     }
 
+    /**
+     * Write short to little-endian byte array
+     * @param value
+     * @return
+     * @throws IOException
+     */
     private static byte[] writeShort(short value) throws IOException {
         byte[] b = new byte[2];
 
@@ -200,4 +180,5 @@ public class BitmapUtils {
 
         return b;
     }
+
 }

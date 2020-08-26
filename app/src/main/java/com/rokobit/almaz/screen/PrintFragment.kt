@@ -64,10 +64,10 @@ class PrintFragment : Fragment() {
         }
 
         mViewModel.layerLiveData.observe(this.viewLifecycleOwner, Observer {
-            val file = File(requireContext().cacheDir, it.layerFile)
+            /*val file = File(requireContext().cacheDir, it.layerFile)
             print_print_btn.isEnabled = true
 
-            print_imageview.setImageURI(Uri.fromFile(file))
+            print_imageview.setImageURI(Uri.fromFile(file))*/
 
         })
 

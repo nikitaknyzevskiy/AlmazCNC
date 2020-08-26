@@ -24,4 +24,8 @@
     <string name="upload">Upload</string>
     <string name="change_image">Select image</string>
     <string name="next">Next</string>
+    <string name="speed">Speed</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+    <string name="pixel">Pixel</string>
 </resources>

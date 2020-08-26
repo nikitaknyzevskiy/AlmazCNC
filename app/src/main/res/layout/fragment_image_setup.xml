@@ -25,38 +25,90 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/change_image"
-        app:layout_constraintBottom_toBottomOf="@+id/imagestup_imageview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imagestup_imageview" />
+        app:layout_constraintTop_toBottomOf="@+id/imagestup_imageview" />
 
     <ImageView
         android:id="@+id/imagestup_imageview"
         android:layout_width="0dp"
-        android:layout_height="270dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/imagesetup_next_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagestup_imageview">
+        app:layout_constraintTop_toBottomOf="@+id/imagesetup_chnage_image">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/imagesetup_pixel_minus_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="sans-serif-black"
+                android:text="-"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/imagesetup_pixel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_weight="1"
+                android:text="20 "
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/imagesetup_pixel_plus_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="sans-serif-black"
+                android:text="+"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/imagestup_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Speed" />
+            android:layout_marginTop="16dp"
+            android:text="@string/speed" />
 
         <SeekBar
             android:id="@+id/imagestup_speed_seekBar"
@@ -69,10 +121,11 @@
             android:progressTint="@color/colorPrimary" />
 
         <TextView
+            android:id="@+id/imagestup_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Black" />
+            android:text="@string/black" />
 
         <SeekBar
             android:id="@+id/imagestup_black_seekBar"
@@ -81,14 +134,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:max="10"
-            android:progress="0"
+            android:progress="3"
             android:progressTint="@color/colorPrimary" />
 
         <TextView
+            android:id="@+id/imagestup_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="White" />
+            android:text="@string/white" />
 
         <SeekBar
             android:id="@+id/imagestup_white_seekBar"
@@ -97,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:max="10"
-            android:progress="0"
+            android:progress="4"
             android:progressTint="@color/colorPrimary" />
 
     </LinearLayout>
@@ -107,10 +161,9 @@
         style="@android:style/Widget.Material.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
         android:indeterminate="false"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/imagesetup_next_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />

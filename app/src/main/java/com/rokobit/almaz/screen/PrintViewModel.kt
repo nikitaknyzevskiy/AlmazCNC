@@ -21,10 +21,18 @@ class PrintViewModel : AlmazViewModel() {
 
     private val fileRepository = FileRepository
 
-    val layerLiveData = MutableLiveData<LayerPresetModel>()
+    val layerLiveData = MutableLiveData<LinkedHashMap<Int, LayerPresetModel>>(linkedMapOf())
 
-    fun addLayer(context: Context, bmp: Bitmap, speed: Int, black: Int, white: Int) = liveData {
-        val outputFile = File(context.cacheDir, "${System.currentTimeMillis()}.jpg")
+    fun addLayer(
+        context: Context,
+        index: Int,
+        bmp: Bitmap,
+        pixel: Int,
+        speed: Int,
+        black: Int,
+        white: Int
+    ) = liveData {
+        val outputFile = File(context.cacheDir, "${System.currentTimeMillis()}.bmp")
 
         BitmapUtils.save(bmp, outputFile)
 
@@ -36,10 +44,11 @@ class PrintViewModel : AlmazViewModel() {
         )
 
         val layer = LayerPresetModel(
+            pictureDensity = pixel.toLong(),
             speed = speed.toLong(),
-            black = black.toLong(),
-            white = white.toLong(),
-            layerFile = outputFile.toString(),
+            black = black.toLong() * (10 /  255),
+            white = white.toLong() * (10 /  255),
+            layerFile = outputFile.name,
             projectName = "Layer1Preset"
         )
 
@@ -49,79 +58,27 @@ class PrintViewModel : AlmazViewModel() {
             Log.e("Nik", "layer error", e)
         }
 
-        try {
+        /*try {
             fileRepository.uploadLayers(arrayListOf(layer))
         } catch (e: Exception) {
             Log.e("Nik", "layer error", e)
-        }
+        }*/
 
-        layerLiveData.postValue(layer)
+        val value = layerLiveData.value
+        value?.put(index, layer)
+        layerLiveData.postValue(value)
 
         emit(true)
     }
 
-    fun uploadImage(file: File) : LiveData<Boolean> {
-        val data = MutableLiveData<Boolean>()
-
-        GlobalScope.launch(Dispatchers.IO + drawError) {
-            try {
-                fileRepository.uploadImage(file)
-                data.postValue(true)
-            }
-            catch (e: com.google.gson.stream.MalformedJsonException) {
-                Log.e("Nik", "upload image error", e)
-                data.postValue(true)
-            }
-            catch (e: Exception) {
-                Log.e("Nik", "upload image error", e)
-                data.postValue(false)
-            }
+    fun uploadLayers() = liveData(Dispatchers.IO) {
+        try {
+            fileRepository.uploadLayers(layerLiveData.value!!.values.toList())
+        } catch (e: Exception) {
+            Log.e("Nik", "layer error", e)
         }
 
-        return data
-    }
-
-    fun uploadLayers(files: List<File>) : LiveData<Boolean> {
-        val data = MutableLiveData<Boolean>()
-
-        if (files.isEmpty()) {
-            data.postValue(false)
-            return data
-        }
-
-        val pName = System.currentTimeMillis().toString()
-
-        GlobalScope.launch(Dispatchers.IO + drawError) {
-            val layers = arrayListOf<LayerPresetModel>()
-
-            for (file in files) {
-                try {
-                    fileRepository.uploadImage(file)
-                } catch (e: com.google.gson.stream.MalformedJsonException) {
-                    Log.e("Nik", "upload image error", e)
-                } catch (e: Exception) {
-                    Log.e("Nik", "upload image error", e)
-                    data.postValue(false)
-                    return@launch
-                } finally {
-                    layers.add(
-                        LayerPresetModel(
-                            projectName = pName,
-                            layerFile = file.name
-                        )
-                    )
-                }
-            }
-
-            try {
-                fileRepository.uploadLayers(layers)
-            } catch (e: Exception) {
-            }
-
-            data.postValue(true)
-        }
-
-        return data
+        emit(true)
     }
 
     fun startPrint() {

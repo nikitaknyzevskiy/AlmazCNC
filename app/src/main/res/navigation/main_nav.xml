@@ -15,11 +15,8 @@
             android:id="@+id/action_menuFragment_to_fragmentOpenFile"
             app:destination="@id/fragmentOpenFile" />
         <action
-            android:id="@+id/action_menuFragment_to_printFragment"
-            app:destination="@id/printFragment" />
-        <action
-            android:id="@+id/action_menuFragment_to_imageSetupFragment"
-            app:destination="@id/imageSetupFragment" />
+            android:id="@+id/action_menuFragment_to_layersListFragment"
+            app:destination="@id/layersListFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionFragment"
@@ -40,9 +37,16 @@
     <fragment
         android:id="@+id/imageSetupFragment"
         android:name="com.rokobit.almaz.screen.ImageSetupFragment"
-        android:label="ImageSetupFragment" >
+        android:label="ImageSetupFragment" />
+    <fragment
+        android:id="@+id/layersListFragment"
+        android:name="com.rokobit.almaz.screen.LayersListFragment"
+        android:label="LayersListFragment" >
         <action
-            android:id="@+id/action_imageSetupFragment_to_printFragment"
+            android:id="@+id/action_layersListFragment_to_printFragment"
             app:destination="@id/printFragment" />
+        <action
+            android:id="@+id/action_layersListFragment_to_imageSetupFragment"
+            app:destination="@id/imageSetupFragment" />
     </fragment>
 </navigation>
