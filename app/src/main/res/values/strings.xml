@@ -28,4 +28,8 @@
     <string name="black">Black</string>
     <string name="white">White</string>
     <string name="pixel">Pixel</string>
+    <string name="please_wait_layers_are_uploading">Please wait !!!.\nLayers are uploading</string>
+    <string name="try_again">try again</string>
+    <string name="uploading_image">Uploading image</string>
+    <string name="uploading_layers">Uploading layers</string>
 </resources>

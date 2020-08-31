@@ -57,9 +57,7 @@ class LayersListFragment : Fragment() {
         }
 
         layerslist_next_btn.setOnClickListener {
-            mViewModel.uploadLayers().observe(this.viewLifecycleOwner, Observer {
-                findNavController().navigate(R.id.action_layersListFragment_to_printFragment)
-            })
+            findNavController().navigate(R.id.action_layersListFragment_to_layersUploadScreen)
         }
 
         layerslist_add_psd_btn.setOnClickListener {
@@ -71,7 +69,10 @@ class LayersListFragment : Fragment() {
                     it.visibility = View.INVISIBLE
                     layerslist_psd_progressBar.visibility = View.VISIBLE
 
-                    mViewModel.decodePsdToLayers(requireContext(), file)
+                    mViewModel.decodePsdToLayers(requireContext(), file).observe(this.viewLifecycleOwner, Observer {
+                        layerslist_add_psd_btn.visibility = View.VISIBLE
+                        layerslist_psd_progressBar.visibility = View.INVISIBLE
+                    })
                 }
         }
     }

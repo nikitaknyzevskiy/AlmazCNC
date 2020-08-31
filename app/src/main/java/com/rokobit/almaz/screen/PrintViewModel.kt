@@ -31,6 +31,19 @@ class PrintViewModel : AlmazViewModel() {
         black: Int,
         white: Int
     ) = liveData {
+
+        addLayerHard(context, index, bmp, pixel, speed, black, white)
+
+        emit(true)
+    }
+
+    private suspend fun addLayerHard(context: Context,
+                                     index: Int,
+                                     bmp: Bitmap,
+                                     pixel: Int,
+                                     speed: Int,
+                                     black: Int,
+                                     white: Int) {
         val outputFile = File(context.cacheDir, "${System.currentTimeMillis()}.bmp")
 
         BitmapUtils.save(bmp, outputFile)
@@ -45,29 +58,15 @@ class PrintViewModel : AlmazViewModel() {
         val layer = LayerPresetModel(
             pictureDensity = pixel.toLong(),
             speed = speed.toLong(),
-            black = black.toLong() * (10 / 255),
-            white = white.toLong() * (10 / 255),
+            black = black.toLong() * (255 / 10),
+            white = white.toLong() * (255 / 10),
             layerFile = outputFile.name,
             projectName = "Layer1Preset"
         )
 
-        try {
-            fileRepository.uploadImage(outputFile)
-        } catch (e: Exception) {
-            Log.e("Nik", "layer error", e)
-        }
-
-        /*try {
-            fileRepository.uploadLayers(arrayListOf(layer))
-        } catch (e: Exception) {
-            Log.e("Nik", "layer error", e)
-        }*/
-
         val value = layerLiveData.value
         value?.put(index, layer)
         layerLiveData.postValue(value)
-
-        emit(true)
     }
 
     fun decodePsdToLayers(context: Context, file: File) = liveData(Dispatchers.IO) {
@@ -76,8 +75,8 @@ class PrintViewModel : AlmazViewModel() {
 
         val psd = Psd(file)
 
-        for (i in 0..psd.layersCount) {
-            addLayer(context, layerLiveData.value?.size ?: 0, psd.getLayer(i).image, 20, 1, 0, 0)
+        for (i in 0 until psd.layersCount) {
+            addLayerHard(context, layerLiveData.value?.size?:0, psd.getLayer(i).image, 20, 1, 0, 0)
         }
 
         emit(true)
@@ -86,11 +85,24 @@ class PrintViewModel : AlmazViewModel() {
     fun uploadLayers() = liveData(Dispatchers.IO) {
         try {
             fileRepository.uploadLayers(layerLiveData.value!!.values.toList())
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             Log.e("Nik", "layer error", e)
         }
-
         emit(true)
+    }
+
+    fun uploadImages(context: Context) = liveData {
+        for ((i, entry) in layerLiveData.value!!.values.withIndex()) {
+            val outputFile = File(context.cacheDir, entry.layerFile)
+            try {
+                fileRepository.uploadImage(outputFile)
+            } catch (e: Exception) {
+                Log.e("Nik", "layer error", e)
+            } finally {
+                emit(i+1)
+            }
+        }
     }
 
     fun startPrint() {

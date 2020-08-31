@@ -43,10 +43,20 @@
         android:name="com.rokobit.almaz.screen.LayersListFragment"
         android:label="LayersListFragment" >
         <action
-            android:id="@+id/action_layersListFragment_to_printFragment"
-            app:destination="@id/printFragment" />
-        <action
             android:id="@+id/action_layersListFragment_to_imageSetupFragment"
             app:destination="@id/imageSetupFragment" />
+        <action
+            android:id="@+id/action_layersListFragment_to_layersUploadScreen"
+            app:destination="@id/layersUploadScreen"
+            app:popUpTo="@id/layersListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/layersUploadScreen"
+        android:name="com.rokobit.almaz.screen.LayersUploadScreen"
+        android:label="LayersUploadScreen" >
+        <action
+            android:id="@+id/action_layersUploadScreen_to_printFragment"
+            app:destination="@id/printFragment"
+            app:popUpTo="@id/layersListFragment" />
     </fragment>
 </navigation>
