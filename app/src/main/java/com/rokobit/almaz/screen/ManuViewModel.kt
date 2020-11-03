@@ -5,15 +5,11 @@ import android.content.Context
 import android.content.Context.WIFI_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.NetworkInfo
 import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class MenuViewModel : ViewModel() {
